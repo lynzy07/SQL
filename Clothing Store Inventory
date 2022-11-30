@@ -1,0 +1,49 @@
+/** clothes
+shirts (10) (8) (17)
+jackets (9) (17) (45)
+pants (15) (8) (19)
+sweaters (18) (11) (25)
+socks (20) (5) (10)
+underwear (20) (4) (9)
+bras (25) (8) (25)
+shoes (15) (12) (25)
+coats (20) (15) (50)
+swim suits (20) (8) (25)
+hats (15) (7) (21)
+scarfs (20) (7) (19)
+tank tops (20) (5) (13)
+bracelets (20) (3) (12) 
+gloves (20) (6) (18) 
+**/
+
+CREATE TABLE clothes (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, cost INTEGER, profit INTEGER);
+
+INSERT INTO clothes VALUES (1, "shirts", 10, 8, 17);
+INSERT INTO clothes VALUES (2, "jackets", 9, 17, 45);
+INSERT INTO clothes VALUES (3, "pants", 15, 8, 19);
+INSERT INTO clothes VALUES (4, "sweaters", 18, 11, 25);
+INSERT INTO clothes VALUES (5, "socks", 20, 5, 10); 
+INSERT INTO clothes VALUES (6, "underwear", 20, 4, 9);
+INSERT INTO clothes VALUES (7, "bras", 25, 8, 25);
+INSERT INTO clothes VALUES (8, "shoes", 15, 12, 25);
+INSERT INTO clothes VALUES (9, "coats", 20, 15, 50);
+INSERT INTO clothes VALUES (10, "swim suits", 20, 8, 25);
+INSERT INTO clothes VALUES (11, "hats", 15, 7, 21); 
+INSERT INTO clothes VALUES (12, "scarfs", 20, 7, 19);
+INSERT INTO clothes VALUES (13, "tank tops", 20, 5, 13);
+INSERT INTO clothes VALUES (14, "bracelets", 20, 3, 12);
+INSERT INTO clothes VALUES (15, "gloves", 20, 6, 18);
+SELECT * FROM clothes;
+
+-- showing the clothing items and their profits from least to greatest 
+SELECT * FROM clothes WHERE profit > 1 ORDER BY profit;
+
+--showing the clothing items where the profit per item was 15 or higher and how many of that item in ordered
+SELECT name, quantity FROM clothes where profit > 15 ORDER BY quantity;
+
+-- showing the clothing item and its cost, greater than 15 in profit, in order from profit, lowest to highest 
+SELECT name, cost, profit
+FROM clothes
+WHERE profit > 15
+ORDER BY profit;
+
