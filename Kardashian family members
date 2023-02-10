@@ -1,0 +1,17 @@
+#In this SQL code, I am querying data about the Kardashian family and answering questions that could be interesting to learn about them. 
+
+#1. From when they were born, and how old they are today, who is worth over 100,000,000? 
+SELECT kardashians.name, kardashians.age_today, wealth.birth_order, wealth.net_worth FROM kardashians
+    JOIN wealth
+    ON kardashians.id=wealth.id
+    WHERE net_worth > 100000000;
+    
+#2. How many social media followers do each Kardashian family member have? 
+SELECT kardashians.id, kardashians.name, social_media.media_followers FROM kardashians
+    LEFT OUTER JOIN social_media
+    ON kardashians.id = social_media.id;
+    
+#3 The net worth of each Kardashian family member. 
+SELECT KARDASHIANS.NAME, WEALTH.NET_WORTH FROM KARDASHIANS
+    JOIN wealth
+    ON kardashians.id=wealth.id
