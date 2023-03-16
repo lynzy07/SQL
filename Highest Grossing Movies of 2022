@@ -1,0 +1,46 @@
+In this SQL, I am querying a data set of the highest grossing movies from 2022 and quantifying various sets of data relevant to the data set. 
+
+/* 1. The released movies and gross amounts for 2022? */ 
+select release, gross from datasample.highgross22; 
+
+/* 2. The highest grossing release and date for 2022? */ 
+select release, open, max(gross) from datasample.highgross22; 
+
+/* 3. What is the average gross for all of the releases in 2022? */ 
+select avg(gross) as average_gross from datasample.highgross22; 
+
+/* 4. What distrubtors released the top 200 releases in 2022? */ 
+select distributor from datasample.highgross22
+group by distributor;  
+
+/* 5. Which releases grossed over 100,000,000 in 2022 and when were they released? */
+select release, open, gross from datasample.highgross22
+WHERE gross > 100000000
+ORDER BY gross desc;
+
+/* 6. What are the top grossing releases opened after 2022-07-01 ? */ 
+Select release, gross, open from datasample.highgross22 
+where open between '2022-07-01' AND '2022-12-31'
+ORDER BY open asc;
+
+/* 7. What is the total gross for the top 200 releases in 2022? */ 
+select sum(gross) as total_sum from datasample.highgross22;
+
+/* 8. Which distributor brought in the most amount of money in 2022? */ 
+select sum(gross), distributor
+from datasample.highgross22
+GROUP BY distributor
+order by sum(gross) desc;
+
+/* 9. Which distributor brought in the least amount of money in 2022? */ 
+select min(gross), distributor
+from datasample.highgross22
+group by distributor
+ORDER BY min(gross)
+LIMIT 1; 
+
+/* 10. What are the top 10 grossing movies in 2022 and how much did they earn? */ 
+select release, gross
+from datasample.highgross22
+order by gross desc
+limit 10; 
