@@ -1,0 +1,44 @@
+#In this SQL Code I am querying a databse from 2019 NYC Airbnb information available so I can answer some questions that may be interesting. 
+
+/* 1. The top 10 airbnb properties in NYC based on cost per night */
+select id, neighbourhood, name, price from datasample.nycairbnb
+order by price desc
+limit 10;
+
+/* 2. The top 10 most expensive properties in Manhattan */ 
+select id, name, neighbourhood_group, price from datasample.nycairbnb
+where neighbourhood_group = 'Manhattan'
+order by price desc
+limit 10;
+
+/* 3. The average cost of an airbnb in Manhattan */ 
+select neighbourhood_group, avg(price) as average_price from datasample.nycairbnb
+where neighbourhood_group = 'Manhattan'; 
+
+/* 4. The top 10 most expensive properties in Brooklyn */ 
+select id, name, neighbourhood_group, price from datasample.nycairbnb
+where neighbourhood_group = 'Brooklyn'
+order by price desc
+limit 10;
+
+/* 5. The average cost of an airbnb in Brooklyn */ 
+select neighbourhood_group, avg(price) as average_price from datasample.nycairbnb
+where neighbourhood_group = 'Brooklyn'; 
+
+/* 6. How many properties are located in the Upper West Side */ 
+select id, name, neighbourhood
+from datasample.nycairbnb
+where neighbourhood = 'Upper West Side'; 
+
+/* 7. Which properties are less than $500 per night? */ 
+select id, name, neighbourhood_group, price
+from datasample.nycairbnb
+group by name
+having price <500
+order by price desc;
+
+/* 8. Which properties are located in Tribeca ? */ 
+select id, name, neighbourhood, price 
+from datasample.nycairbnb
+where name like '%Tribeca%'
+order by price desc;
