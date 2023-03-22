@@ -1,0 +1,53 @@
+# In this SQL Query I took data and answered various questions using different query methods. 
+
+/* 1. What are the user ratings for top books released in 2017? */ 
+select name, user, year, genre from datasample.amazontop50
+where year is '2017'
+order by user desc;  
+
+/* 2. What are the top released books from 2009-2021? */ 
+select name, author, user, year, genre
+from datasample.amazontop50
+where year <=2021
+order by user desc, year desc; 
+
+/* 3. What books did J.K. Rowling release through 2009-2021? */ 
+select author, name, year from datasample.amazontop50
+where author is 'J.K. Rowling'
+order by year desc;
+
+/* 4. Which book has the most reviews from 2009-2021? */ 
+select author, name, reviews
+from datasample.amazontop50
+ORDER BY REVIEWS DESC
+limit 1;
+
+/* 5. Which book has the least reviews from 2009-2021? */ 
+select author, name, reviews
+from datasample.amazontop50
+order by reviews asc
+LIMIT 1;
+
+/* 6. Which 5 books had the most reviews in 2018? */  
+select author, name, reviews, year
+from datasample.amazontop50
+where year is '2018'
+order by reviews desc
+LIMIT 5;
+
+/* 7. How many reviews were made in 2021? */ 
+select sum(reviews) as total_reviews, year 
+from datasample.amazontop50
+where year is '2021';
+
+/* 8. If each review, equaled 1 purchase, how much money would have been spent on each book in 2020? */ 
+select name, author, sum(reviews)*price_r as money_spent, reviews, price_r, year 
+from datasample.amazontop50
+where year is '2020'
+group by name;
+
+/* 9. If each review, equaled 1 purchase, how much money would have been spent on J.K. Rowling materials released through 2009-2021? */ 
+select name, author, sum(reviews)*price_r as money_spent, reviews, price_r, year 
+from datasample.amazontop50
+where author is 'J.K. Rowling'
+group by name; 
