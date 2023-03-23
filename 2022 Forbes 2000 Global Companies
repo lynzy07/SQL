@@ -1,0 +1,59 @@
+#In this SQL code, I am querying data from the Forbes 2000 Global Companies data set from the year 2022. 
+
+/* 1. Which banking industries made the top 2000 companies and how much revenue did they earn? */
+select ranking, organization_name, industry, revenue_bill
+from datasample.forbes2000
+where industry is 'Banking'
+order by revenue_bill desc;
+
+/* 2. Which companies made the top 2000 Forbes list that are located in China? */
+select ranking, organization_name, industry, country
+from datasample.forbes2000
+where country is 'China';
+select * from datasample.forbes2000;
+
+/* 3. Which companies were created from first to last ? */
+select ranking, organization_name, year_founded
+from datasample.forbes2000
+WHERE YEAR_FOUNDED >=1472
+ORDER BY YEAR_FOUNDED ASC;
+
+/* 4. Which are the top 10 companies who accumulated the most profits? */
+select ranking, organization_name, industry, country, profits_bill
+from datasample.forbes2000
+order by profits_bill desc
+limit 10;
+
+/* 5. What is the total profits of United States based companies? */ 
+select country, sum(profits_bill) as us_totalprofit 
+from datasample.forbes2000
+where country is 'United States';
+
+/* 6. Which top 10 companies had the highest market value? */ 
+select ranking, organization_name, market_value_bill
+from datasample.forbes2000
+order by market_value_bill desc
+limit 10; 
+
+/* 7. What is the average market value of the top 10 companies? */ 
+select avg(market_value_bill) as average_market_value
+from datasample.forbes2000
+order by market_value_bill desc
+limit 10;
+
+/* 8. How many food, drink, and tobacco companies made the Forbes 2000 list? */ 
+select ranking, organization_name, industry 
+from datasample.forbes2000
+where industry is 'Food, Drink & Tobacco';
+
+/* 9. What is the total profits from the top 10 food, drink, and tobacco companies from the Forbes 2000? */ 
+select sum(profits_bill) as total_profits_bill
+from datasample.forbes2000
+order by profits_bill desc
+limit 10; 
+
+/* 10. Which countries were the bottom 10 in relation to revenue earned? */ 
+select organization_name, country, revenue_bill
+from datasample.forbes2000
+order by revenue_bill asc
+limit 10;
