@@ -1,0 +1,69 @@
+#In this project I downloaded a superstore data set from Kaggle.
+#Then, I created a table to insert the date into. 
+#Finally I performed multiple queries and answered potential questions that could be asked. 
+
+/* 1. Orders that were placed in July 2016. */ 
+select order_id, order_date
+from datasample.superstore
+where order_date between '2016-07-01' and '2016-07-31'; 
+
+/* 2. How many orders were placed in December 2016? */ 
+select sum(quantity) as total_orders
+from datasample.superstore
+where order_date between '2016-12-01' and '2016-12-31';
+ 
+/* 3. How many orders did Corporate customer dv-13045 make and how much profit was made? */ 
+select customer, sum(quantity) as total_quantity, sum(profit) as total_profit
+from datasample.superstore
+where customer is 'DV-13045'; 
+
+/* 4. What items sold the most? */ 
+select product_name, quantity
+from datasample.superstore
+order by quantity desc
+limit 29;
+
+/* 5. Which products sold the least amount and how much profit did they earn in May 2017 */ 
+select order_date, product_name, quantity, PROFIT
+from datasample.superstore
+where order_date between '2017-05-01' and '2017-05-31'
+ORDER BY QUANTITY ASC
+LIMIT 32;
+
+/* 6. What is the average discount offered to customers? */ 
+select avg(discount) as average_discount 
+from datasample.superstore; 
+
+/* 7. Which state purchases the most products? */ 
+select state, sum(quantity) as total_quantity
+from datasample.superstore
+group by state
+order by total_quantity desc
+limit 1;
+
+/* 8. Which state purchase the least amount of products? */ 
+select state, sum(quantity) as total_quantity
+from datasample.superstore
+group by state
+order by total_quantity asc
+limit 1;  
+
+/* 9. Which region of the United States purchases the most products? */ 
+select region, sum(quantity) as total_quantity
+from datasample.superstore
+group by region
+order by total_quantity desc
+limit 1; 
+
+/* 10. Which region of the United States purchases the least amount of products? */ 
+select region, sum(quantity) as total_quantity
+from datasample.superstore
+group by region
+order by total_quantity asc
+limit 1;
+
+/* 11. How many products are ordered in each store category and how much profit is made? */ 
+select category, sum(quantity) as total_quantity, sum(profit) as total_profit
+from datasample.superstore
+group by category
+order by total_quantity desc; 
