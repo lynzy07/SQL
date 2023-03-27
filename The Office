@@ -1,0 +1,50 @@
+# In this SQL query I created two tables with two different types of data. I performed queries on different types of questions that could be asked.
+
+/* 1. What is the average salary of a Salesman? */ 
+select job_title, avg(salary) from datasample.employeedemographics
+inner join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id
+where job_title = 'Salesman'
+group by job_title;
+
+/* 2. What is the average salary for the female employees? */ 
+select gender, avg(salary) as average_salary from datasample.employeedemographics
+inner join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id
+where gender is 'Female';
+
+/* 3. What is the average salary for the male employees? */ 
+select gender, avg(salary) as average_salary from datasample.employeedemographics
+inner join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id
+where gender is 'Male'; 
+
+/* 4. What is the average salary for an accountant? */ 
+select avg(salary) as average_salary, job_title
+from datasample.employeesalary
+where job_title is 'Accountant'; 
+
+/* 5. What are the positions of the employees in this office? */ 
+select first_name, last_name, job_title
+from datasample.employeedemographics
+full outer join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id;
+
+/* 6. What is the total salary of each employee ? */ 
+select first_name, last_name, salary
+from datasample.employeedemographics
+full outer join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id; 
+
+/* 7. Somebody needs a raise, who is currently making the least amount of money? */ 
+select first_name, last_name, min(salary) as minimum_salary
+from datasample.employeedemographics
+full outer join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id;
+
+/* 8. Who is paid from greatest to least in the office? */ 
+select first_name, last_name, salary
+from datasample.employeedemographics
+full outer join datasample.employeesalary
+on datasample.employeedemographics.employee_id=datasample.employeesalary.employee_id
+order by salary desc;
